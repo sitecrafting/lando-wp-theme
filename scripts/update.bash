@@ -91,6 +91,7 @@ update() {
 
   if [[ $DRY_RUN ]] ; then
     echo 'exiting after dry run'
+    exit
   fi
 
   # build and tag Docker image
