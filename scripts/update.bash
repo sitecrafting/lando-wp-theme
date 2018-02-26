@@ -52,6 +52,23 @@ get_latest_version() {
 update() {
   sed -i '' "s/^ENV WORDPRESS_VERSION .*/ENV WORDPRESS_VERSION $latest_version/" Dockerfile
   sed -i '' "s/^ENV WORDPRESS_SHA1 .*/ENV WORDPRESS_SHA1 $latest_checksum/" Dockerfile
+  sed -i '' "s/^Current version: .*/Current version: `$latest_version`/" README.md
+
+  DOCKER_IMAGE=${DOCKER_IMAGE:-'sitecrafting/lando-wp-theme'}
+  docker build -t "$DOCKER_IMAGE:$latest_version" .
+  docker tag "$DOCKER_IMAGE:$latest_version" "$DOCKER_IMAGE:latest"
+
+  if [[ -f .env ]] ; then
+    source .env
+    docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+    docker push "$DOCKER_IMAGE:$latest_version"
+    docker push "$DOCKER_IMAGE:latest"
+  fi
+
+  git checkout -b "v$latest_version" master
+  git commit --all -m "bump version to $latest_version"
+  git tag -am "tag $latest_version" "$latest_version"
+  # TODO git push
 }
 
 
