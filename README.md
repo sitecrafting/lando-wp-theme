@@ -21,7 +21,7 @@ services:
         environment:
           LANDO_WEBROOT: /var/www/html
           # specify defaults to setup-wordpress.bash
-          DEFAULT_URL: 'https://lando-wp-theme.lndo.site'
+          DEFAULT_URL: 'https://my-wp-theme.lndo.site'
           DEFAULT_TITLE: 'My Beautiful Site'
           DEFAULT_ADMIN_USER: 'admin'
           DEFAULT_ADMIN_PASSWORD: 'password'
