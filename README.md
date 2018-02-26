@@ -33,6 +33,10 @@ tooling:
     cmd: setup-wordpress.bash
     description: 'Install and configure WordPress for custom theme dev'
 
+  # because WP core is installed within the image itself, the /app directory
+  # doesn't look like a valid WP install to WP-CLI. To get around this, you
+  # have to spec specify a --path option. The `w` tooling command simply
+  # aliases `wp` with this option.
   w:
     service: appserver
     cmd: 'wp --path=/var/www/html'
