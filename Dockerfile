@@ -6,7 +6,7 @@ LABEL maintainer="Coby Tamayo <ctamayo@sitecrafting.com>" license="MIT"
 
 # Download WordPress core
 ENV WORDPRESS_VERSION 4.9.4
-ENV WORDPRESS_SHA1 xxx
+ENV WORDPRESS_SHA1 0e630bf940fd586b10e099cd9195b3e825fb194c
 
 # install WordPress core
 RUN set -ex; \

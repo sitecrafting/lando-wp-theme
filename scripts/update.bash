@@ -1,5 +1,27 @@
 #!/bin/bash
 
+usage() {
+  echo 'update.bash [-h|--help] [-d|--dry-run]'
+}
+
+POSITIONAL=()
+while [[ $# -gt 0 ]] ; do
+  key="$1"
+
+  case $key in
+    -d|--dry-run)
+    DRY_RUN="1"
+    shift # next opt
+    ;;
+    -h|--help)
+    usage
+    exit
+    shift
+    ;;
+  esac
+done
+
+DRY_RUN=${DRY_RUN:-''}
 
 main() {
   # First make sure we're on master and starting at the latest version we have
@@ -66,6 +88,10 @@ update() {
   sed -i '' "s/^ENV WORDPRESS_VERSION .*/ENV WORDPRESS_VERSION $latest_version/" Dockerfile
   sed -i '' "s/^ENV WORDPRESS_SHA1 .*/ENV WORDPRESS_SHA1 $latest_checksum/" Dockerfile
   sed -i '' "s/^Current version: .*/Current version: `$latest_version`/" README.md
+
+  if [[ $DRY_RUN ]] ; then
+    echo 'exiting after dry run'
+  fi
 
   # build and tag Docker image
   DOCKER_IMAGE=${DOCKER_IMAGE:-'sitecrafting/lando-wp-theme'}
