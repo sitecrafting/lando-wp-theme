@@ -6,7 +6,7 @@ A docker image for hacking on a WordPress theme without installing core
 
 Designed for usage with Lando:
 
-```
+```yaml
 # .lando.yml
 name: lando-wp-theme
 recipe: wordpress
