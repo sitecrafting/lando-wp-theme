@@ -43,4 +43,4 @@ tooling:
 
 This repo is versioned in lockstep with WordPress production releases. Hopefully.
 
-Current version: 
+Current version: `4.9.4`

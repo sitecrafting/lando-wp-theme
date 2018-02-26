@@ -87,7 +87,7 @@ get_latest_version() {
 update() {
   sed -i '' "s/^ENV WORDPRESS_VERSION .*/ENV WORDPRESS_VERSION $latest_version/" Dockerfile
   sed -i '' "s/^ENV WORDPRESS_SHA1 .*/ENV WORDPRESS_SHA1 $latest_checksum/" Dockerfile
-  sed -i '' "s/^Current version: .*/Current version: `$latest_version`/" README.md
+  sed -i '' "s/^Current version: .*/Current version: \`$latest_version\`/" README.md
 
   if [[ $DRY_RUN ]] ; then
     echo 'exiting after dry run'
